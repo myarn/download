@@ -1,7 +1,3 @@
-import { Projector } from './deps/projector.ts';
-import { DownloadProgressStream } from './transfromStreams/DownloadProgressStream.ts';
-import { HashTransformStream, WasmDigestAlgorithms } from './transfromStreams/HashTransformStream.ts';
-
 export class Download {
   from: ReadableStream<Uint8Array>;
 
@@ -9,22 +5,15 @@ export class Download {
     this.from = from;
   }
 
-  withHash (algorithm: WasmDigestAlgorithms): HashTransformStream {
-    const hashTransformeStream = new HashTransformStream(algorithm)
-    this.from.pipeThrough(hashTransformeStream);
-
-    return hashTransformeStream;
-  }
-
-  withProgressBar (
-    filename: string,
-    value: number,
-    max: number,
-    projector: Projector = new Projector()
-  ) {
-    this.from.pipeThrough(new DownloadProgressStream(
-      filename, value, max, projector
-    ));
+  pipeThrough (transform: {
+    writable: WritableStream<Uint8Array>;
+    readable: ReadableStream<Uint8Array>;
+  }, options?: PipeOptions) {
+    return new Download(
+      this.from.pipeThrough(
+        transform, options
+      )
+    )
   }
 
   to (to: WritableStream<Uint8Array>) {
