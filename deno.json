@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "test": "deno test --allow-read=\"./test/test.pdf\",\"$TMPDIR\" --allow-write=\"./test/test.pdf\",\"$TMPDIR\" --allow-net=\"www.w3.org\""
+  }
+}
