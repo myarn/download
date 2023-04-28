@@ -1,6 +1,6 @@
 import { Line, ProgressBar, LoadingIndicator, Projector, toTemplateText } from '../../deps/projector.ts';
 import { filesize } from '../../deps/filesize.ts';
-import { FilesizeText } from './FilesezeText.ts';
+import { FilesizeText } from './FilesizeText.ts';
 
 export class DownloadProgress extends Line {
   progressBar: ProgressBar;
