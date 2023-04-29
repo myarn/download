@@ -1,1 +1,1 @@
-export * from 'https://raw.githubusercontent.com/myarn/projector/v0.0.2/mod.ts';
+export * from 'https://raw.githubusercontent.com/myarn/projector/0.0.3/mod.ts';

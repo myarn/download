@@ -18,7 +18,7 @@ export class DownloadProgress extends Line {
     this.loadingIngicator = new LoadingIndicator();
     this.nowSize = new FilesizeText(value);
 
-    this.addTemplateText(toTemplateText`[${this.progressBar}] ${this.loadingIngicator} ${filename} (${this.nowSize}/${filesize(this.max)})`);
+    this.addText(toTemplateText`[${this.progressBar}] ${this.loadingIngicator} ${filename} (${this.nowSize}/${filesize(this.max)})`);
   }
 
   updateSize (size: number) {
