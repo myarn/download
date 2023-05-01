@@ -20,7 +20,7 @@ export class Download {
     return this.from.pipeTo(to);
   }
 
-  async downloadTo (to: string) {
+  async downloadTo (to: string | URL) {
     const tempPath = await Deno.makeTempFile({
       suffix: '.jar'
     });
