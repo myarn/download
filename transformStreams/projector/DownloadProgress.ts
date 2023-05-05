@@ -28,6 +28,7 @@ export class DownloadProgress extends Line {
   }
 
   updateFilesize (filesize: number) {
+    this.progressBar.max = filesize;
     this.filesize.value = filesize;
   }
 
