@@ -2,18 +2,13 @@ import { Projector } from '../deps/projector.ts';
 import { DownloadProgress } from './projector/DownloadProgress.ts';
 
 export class DownloadProgressTransformer implements Transformer<Uint8Array, Uint8Array> {
-  projector: Projector;
   progress: DownloadProgress;
   nowSize = 0;
 
   constructor (
-    projector: Projector,
-    filename: string,
-    value: number,
-    max: number
+    prgoress: DownloadProgress
   ) {
-    this.projector = projector;
-    this.progress = new DownloadProgress(projector, filename, value, max);
+    this.progress = prgoress;
   }
 
   start() {}
@@ -30,12 +25,17 @@ export class DownloadProgressTransformer implements Transformer<Uint8Array, Uint
 }
 
 export class DownloadProgressStream extends TransformStream {
+  readonly progress: DownloadProgress;
+
   constructor (
     filename: string,
     value: number,
     max: number,
     projector: Projector = new Projector(),
   ) {
-    super(new DownloadProgressTransformer(projector, filename, value, max));
+    const progress = new DownloadProgress(projector, filename, value, max);
+    super(new DownloadProgressTransformer(progress));
+
+    this.progress = progress;
   }
 }
